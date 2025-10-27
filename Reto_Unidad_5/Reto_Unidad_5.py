@@ -1,101 +1,68 @@
+# RETO UNIDAD 5: ARCHIVOS Y VISUALIZACIÓN.
 # Aplicación CLI (Command Line Interface) de análisis y graficación de datos.
+
+import csv
 
 # Creación de funciones CASE 2 MENÚ PRINCIPAL:
 
 def CNPYC():
-    nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ")
-    archivo = open(nombre_archivo, "r", encoding="utf-8") # Se abre el archivo de texto.
-    contenido = archivo.read()
-    num_palabras = len(contenido.split()) # Se cuenta el número de palabras.
-    num_caracteres_total = len(contenido) # Se lee el número de caracteres.
-    num_caracteres_sin_espacios = len(contenido.replace(" ", "").replace("\n", "")) # Se lee la cantidad de caracteres, sin incluir los espacios.
+    nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    archivo = open(nombre_archivo, "r", encoding="utf-8") # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
+    contenido = archivo.read() # Leemos los datos del archivo.
+    num_palabras = len(contenido.split()) # Se cuenta el número de palabras. El método split permite separar una cadena de texto en elementos diferentes, en este caso, palabras.
+    num_caracteres_total = len(contenido) # Se lee el número de caracteres. En ese caso no se usa split, porque no queremos que cada palabra sea un caracter. Se necesita contar cada letra, espacio, signo, etc.
+    num_caracteres_sin_espacios = len(contenido.replace(" ", "").replace("\n", "")) # Se lee la cantidad de caracteres, sin incluir los espacios. Reemplazamos lo espacios y los enter para que ahora ya no existan al momento de contar.
     print("=== RESULTADOS ===")
     print(f"Archivo: {nombre_archivo}")
     print(f"Número de palabras: {num_palabras}")
     print(f"Caracteres totales (incluyendo espacios): {num_caracteres_total}")
     print(f"Caracteres sin espacios: {num_caracteres_sin_espacios}")
+    archivo.close() # Se cierra el archivo para evitar conflictos al momento de querer modificarlo después.
 
 def RUPPO():
-    nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ")
-    archivo = open(nombre_archivo, "r", encoding="utf-8") # Se abre el archivo de texto.
-    contenido = archivo.read()
-    palabra_buscar = input("Ingrese la palabra que desea reemplazar: ")
-    palabra_reemplazo = input("Ingrese la nueva palabra: ")
-    ocurrencias = contenido.count(palabra_buscar) # Permite contar cuántas veces aparece antes de reemplazar
+    nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    archivo = open(nombre_archivo, "r", encoding="utf-8") # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
+    contenido = archivo.read() # Leemos los datos del archivo.
+    palabra_buscar = input("Ingrese la palabra que desea reemplazar: ") # Se lee la palabra a reemplazar.
+    palabra_reemplazo = input("Ingrese la nueva palabra: ") # Se lee la nueva palabra.
+    ocurrencias = contenido.count(palabra_buscar) # Permite contar cuántas veces aparece la palabra antes de reemplazar.
     if ocurrencias == 0:
-        print(f"La palabra '{palabra_buscar}' no se encontró en el archivo.")
+        print(f"La palabra '{palabra_buscar}' no se encontró en el archivo.") # No se puede reemplazar una palabra que no está en el archivo.
     else:
         nuevo_contenido = contenido.replace(palabra_buscar, palabra_reemplazo) # Se reemplaza la palabra.
-        with open(nombre_archivo, "w", encoding="utf-8") as archivo: # Guardar cambios sobrescribiendo el archivo. Se usa utf-8 para evitar problemas con tiles y letras "ñ".
-            archivo.write(nuevo_contenido)
+        with open(nombre_archivo, "w", encoding="utf-8") as archivo: # Permite abrir el archivo, pero esta vez con la posibilidad de escribir en él. 
+            archivo.write(nuevo_contenido) # Escribe las nuevas palabras en el archivo.
         print("=== REEMPLAZO COMPLETADO CON ÉXITO ===")
         print(f"Archivo: {nombre_archivo}")
         print(f"Palabra reemplazada: '{palabra_buscar}' ---> '{palabra_reemplazo}'")
         print(f"Ocurrencias reemplazadas: {ocurrencias}")
+        # No se usa close() porque el archivo se cierra automáticamente al salir del bloque with.
+
+def HDODLV():
+ print ("Aún se está trabajando en la función.")
 
 # Creación de funciones CASE 3 MENÚ PRINCIPAL:
 
 def M15PF ():
-    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ")
-    archivo = open(nombre_archivo, "r", encoding="utf-8")
+    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    archivo = open(nombre_archivo, "r", encoding="utf-8") # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
     print("=== PRIMERAS QUINCE (15) FILAS DEL ARCHIVO ===")
-    contador = 0
+    contador = 0 # Usamos un contador para garantizar que solo se mostrarán las primeras 15 líneas.
     for linea in archivo:
-        print(linea.strip())  # elimina los saltos de línea
-        contador += 1
-        if contador == 15:
-            break  # detiene el ciclo después de 15 líneas
-    archivo.close()
+        print(linea.strip())  # El módulo strip permite eliminar los saltos de línea y espacios en blanco al inicio y al final de la cadena.
+        contador += 1 # Sumamos una unidad al contador, pues ya se ha mostrado una línea.
+        if contador == 15: 
+            break  # Detiene el ciclo después de 15 líneas.
+    archivo.close() # Se cierra el archivo para evitar conflictos al momento de querer modificarlo después.
     print(f"Se mostraron las primeras {contador} líneas del archivo.")
 
+
 def CE():
-    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ")
-    columna = int(input("Ingrese el número de la columna que desea analizar (empezando desde 0): "))
-    archivo = open(nombre_archivo, "r", encoding="utf-8")
-    datos = []
-    contador = 0
-    for linea in archivo:
-        linea = linea.strip()
-        partes = linea.split(",")
-        # Se ignora la primera línea si tiene encabezados
-        if contador == 0:
-            contador += 1
-            continue
-        if columna < len(partes):
-            valor = partes[columna]
-            # Solo se agregan valores numéricos
-            if valor.replace('.', '', 1).isdigit():
-                datos.append(float(valor))
-        contador += 1
-    archivo.close()
-    # Verificar que haya datos
-    n = len(datos)
-    if n == 0:
-        print("No hay datos numéricos en esa columna.")
-        return None
-    # Calcular promedio
-    suma = 0
-    for v in datos:
-        suma += v
-    promedio = suma / n
-    # Calcular mediana
-    datos.sort()
-    if n % 2 == 0:
-        mediana = (datos[n//2 - 1] + datos[n//2]) / 2
-    else:
-        mediana = datos[n//2]
-    # Calcular desviación estándar
-    suma_cuadrados = 0
-    for v in datos:
-        suma_cuadrados += (v - promedio) ** 2
-    desviacion = (suma_cuadrados / n) ** 0.5
-    maximo = datos[-1]
-    minimo = datos[0]
-    return n, promedio, mediana, desviacion, maximo, minimo
+  print ("Aún se está trabajando en la función.")
 
+def GUCCLD():
+  print ("Aún se está trabajando en la función.")
 
-def HDODLV():
- print ("Aún se está trabajando en la función.")
 
 # MENÚ PRINCIPAL.
 
@@ -115,7 +82,7 @@ while True:
                 case 2:
                     RUPPO()
                 case 3:
-                    print ("Aún se está trabajando en la función.")
+                    HDODLV()
                 case 4:
                     print ("¡Hasta luego!\n Saliendo del programa...")
                     break
@@ -129,7 +96,7 @@ while True:
                 case 2:
                     CE()
                 case 3:
-                    HDODLV()
+                    GUCCLD()
                 case 4:
                     print ("¡Hasta luego!\n Saliendo del programa...")
                     break

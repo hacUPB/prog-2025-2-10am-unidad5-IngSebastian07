@@ -14,3 +14,4 @@ plt.ylabel('Frecuencia')
 
 # Mostrar la gráfica
 plt.show()
+

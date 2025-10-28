@@ -2,6 +2,7 @@
 # Aplicación CLI (Command Line Interface) de análisis y graficación de datos.
 
 import csv
+import matplotlib as plt
 
 # Creación de funciones CASE 2 MENÚ PRINCIPAL:
 
@@ -39,7 +40,25 @@ def RUPPO():
         # No se usa close() porque el archivo se cierra automáticamente al salir del bloque with.
 
 def HDODLV():
- print ("Aún se está trabajando en la función.")
+    nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    with open(nombre_archivo, 'r', encoding='utf-8') as archivo: # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
+        texto = archivo.read().lower()  # El módulo lower permite convertir todas las letras a minísculas.
+    
+    vocales = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0} # Se hace uso de un diccionario para las ocurrencias de cada vocal.
+    
+    for i in texto: # Bucle for para recorrer cada letra en el texto.
+        if i in vocales: # Si la letra está en el diccionario "vocales", entonces se sumará una ocurrencia.
+            vocales[i] += 1 
+    
+    letras = list(vocales.keys()) # Se extraen las claves del diccionario.
+    conteos = list(vocales.values()) # Se extraen los valores del diccionario.
+    
+    # Graficar el histograma
+    plt.bar(letras, conteos, color='skyblue', edgecolor='black')
+    plt.title('Histograma de Ocurrencia de Vocales')
+    plt.xlabel('Vocales')
+    plt.ylabel('Frecuencia')
+    plt.show()
 
 # Creación de funciones CASE 3 MENÚ PRINCIPAL:
 

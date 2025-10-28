@@ -2,7 +2,32 @@
 # Aplicación CLI (Command Line Interface) de análisis y graficación de datos.
 
 import csv
+import os
 import matplotlib as plt
+
+# Creación de funcion CASE 1 MENÚ PRINCIPAL:
+
+# Se hizo uso del módulo "OS" sugerido por el docente, principalmente para retornar el directorio actual si el usuario no escribe nada al momento de preguntarle y para listar todos los archivos de un directorio.
+
+def LA():
+    ruta = input("Ingrese la ruta de la carpeta (o presione Enter para usar la ruta actual): ")
+    
+    if ruta == "":
+        ruta = os.getcwd()     # Si el usuario no escribe nada, se usa la ruta actual.
+    
+    if not os.path.exists(ruta):     # os.path.exists() verifica si el directorio existe.
+        print("La ruta ingresada no existe.")
+        return
+    
+    print(f"Archivos en: {ruta}")
+    
+    archivos = os.listdir(ruta) # os.listdir() permite listar todos los archivos en el directorio seleccionado.
+    if not archivos:
+        print("La carpeta está vacía.")
+    else:
+        for i, archivo in enumerate(archivos, start=1): # Recorre todos los archivos en la lista y comienza en uno para una correcta numeración.
+            print(f"{i}. {archivo}")
+
 
 # Creación de funciones CASE 2 MENÚ PRINCIPAL:
 
@@ -41,24 +66,17 @@ def RUPPO():
 
 def HDODLV():
     nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
-    with open(nombre_archivo, 'r', encoding='utf-8') as archivo: # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
-        texto = archivo.read().lower()  # El módulo lower permite convertir todas las letras a minísculas.
-    
-    vocales = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0} # Se hace uso de un diccionario para las ocurrencias de cada vocal.
-    
-    for i in texto: # Bucle for para recorrer cada letra en el texto.
-        if i in vocales: # Si la letra está en el diccionario "vocales", entonces se sumará una ocurrencia.
-            vocales[i] += 1 
-    
-    letras = list(vocales.keys()) # Se extraen las claves del diccionario.
-    conteos = list(vocales.values()) # Se extraen los valores del diccionario.
-    
-    # Graficar el histograma
-    plt.bar(letras, conteos, color='skyblue', edgecolor='black')
-    plt.title('Histograma de Ocurrencia de Vocales')
-    plt.xlabel('Vocales')
-    plt.ylabel('Frecuencia')
-    plt.show()
+    with open(nombre_archivo, "r", encoding="utf-8") as archivo: # Abrimos el archivo como solo lectura y usamos la codificación adecuada para evitar problemas con tiles y letras ñ.
+        contenido = archivo.read().lower() # Leemos el archivo. El método lower() para pasar todas las letras a minúscula y trabajar más cómodamente.
+    vocales = ["a","e","i","o","u"] # Se crea una lista vacía donde se almacenarán las vocales. Agregamos las vocales iniciales para garantizar el orden en el histograma. Suma una letra de más a cada vocal, pero es irrelevante en la gráfica.
+    for i in contenido: # Se usa un bucle para recorrer todas las letras del texto.
+        if i in "aeiou": 
+            vocales.append(i) # Si la letra pertenece a las vocales, se agrega a la lista.
+    plt.hist(vocales, bins=15, edgecolor='black') # Se configura el histograma con ancho de columna del gráfico, color de relleno y color de borde.
+    plt.title("HISTOGRAMA DE OCURRENCIAS VOCALES.") # Se asigna un nombre a la gráfica.
+    plt.xlabel("Vocales") # Se asignan las vocales a lo largo del eje X.
+    plt.ylabel("Frecuencia") # Se asignan las ocurrencias a lo largo del eje Y.
+    plt.show() # Se muestra el histograma.
 
 # Creación de funciones CASE 3 MENÚ PRINCIPAL:
 
@@ -68,7 +86,7 @@ def M15PF ():
     print("=== PRIMERAS QUINCE (15) FILAS DEL ARCHIVO ===")
     contador = 0 # Usamos un contador para garantizar que solo se mostrarán las primeras 15 líneas.
     for linea in archivo:
-        print(linea.strip())  # El módulo strip permite eliminar los saltos de línea y espacios en blanco al inicio y al final de la cadena.
+        print(linea)
         contador += 1 # Sumamos una unidad al contador, pues ya se ha mostrado una línea.
         if contador == 15: 
             break  # Detiene el ciclo después de 15 líneas.
@@ -76,8 +94,47 @@ def M15PF ():
     print(f"Se mostraron las primeras {contador} líneas del archivo.")
 
 
-def CE():
-  print ("Aún se está trabajando en la función.")
+def CE(datos): # La función recibe como argumento la variable datos que contiene la información por colunmas.
+    columna = int(input("Ingrese el número de la columna que desea analizar (empezando desde 0): ")) # Permite elegir al usuario la colunma a analizar.
+    valores = [] # Se crea una lista vacía para almacenar los datos de la columna específica.
+    for fila in datos: # Se usa un bucle for para recorrer cada fila, pues finalmente la colunma requiere filas para almacenar los datos.
+        valores.append(fila[columna]) # Se agregan los datos a la lista a medida que se recorren las filas. Se usa [colunma] para asegurar que solo se incluye el dato posicionado en la colunma seleccioanda.
+    
+    n = len(valores) # Se define una variable para contar cuantos valores tiene la lista, es decir, con cuantos datos se van a calcular las estadísticas.
+    
+    # Se calcula el promedio.
+    suma = 0
+    for v in valores:
+        suma += v
+    promedio = suma / n
+    
+    # Se calcula la mediana.
+    valores_ordenados = sorted(valores) # sorted() permite organizar los datos de menor a mayor, paso estrictamente necesario para calcular la mediana.
+    if n % 2 == 0:
+        mediana = (valores_ordenados[n//2 - 1] + valores_ordenados[n//2]) / 2 # Si el número de valores es par, indica que la mediana va a estar dada por el promedio de dos valores. Si es impar, va a ser un único elemento.
+    else:
+        mediana = valores_ordenados[n//2]
+    
+    # Se calcula la desviación estándar.
+    suma_diferencias = 0
+    for v in valores:
+        suma_diferencias += (v - promedio) ** 2
+    desviacion = (suma_diferencias / n) ** 0.5
+    
+    maximo = max(valores)
+    minimo = min(valores)
+    
+    # Se retornan los resultados en forma de diccionario, para poder mostrarlos después.
+    return {
+        "Número de datos": n,
+        "Promedio": promedio,
+        "Mediana": mediana,
+        "Desviación estándar": desviacion,
+        "Máximo": maximo,
+        "Mínimo": minimo
+    }
+    print (f"===CALCULOS ESTADÍSTICOS===\n Número de Datos ---> {n}\n Promedio ---> {promedio}\n Mediana ---> {mediana}\n Desviación Estándar ---> {desviacion}\n Máximo ---> {maximo}\n Mínimo ---> {minimo}")
+
 
 def GUCCLD():
   print ("Aún se está trabajando en la función.")
@@ -92,7 +149,7 @@ while True:
 
     match (OPCION):
         case 1:
-            print ("Aún se está trabajando en la función.")
+            LA()
         case 2:
             OPCION2 = int(input("Ha seleccionado la opción que le permite procesar archivo de texto (.txt)\n Esta opción le permite: \n (1). Contar número de palabras y caracteres.\n (2). Reemplazar una palabra por otra.\n (3). Histograma de ocurrencia de las vocales.\n (4). Salir.\n Ahora, seleccione qué desea realizar con su archivo: "))
             match (OPCION2):

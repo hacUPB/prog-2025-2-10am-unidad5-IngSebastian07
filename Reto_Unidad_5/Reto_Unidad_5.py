@@ -33,7 +33,7 @@ def LA():
 
 def CNPYC():
     nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
-    ruta = "./Reto_Unidad_5/" + nombre_archivo
+    ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding="utf-8") as archivo: # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
         contenido = archivo.read() # Leemos los datos del archivo.
     num_palabras = len(contenido.split()) # Se cuenta el número de palabras. El método split permite separar una cadena de texto en elementos diferentes, en este caso, palabras.
@@ -47,7 +47,7 @@ def CNPYC():
 
 def RUPPO():
     nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
-    ruta = "./Reto_Unidad_5/" + nombre_archivo
+    ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding="utf-8") as archivo: # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
         contenido = archivo.read() # Leemos los datos del archivo.
     palabra_buscar = input("Ingrese la palabra que desea reemplazar: ") # Se lee la palabra a reemplazar.
@@ -67,7 +67,7 @@ def RUPPO():
 
 def HDODLV():
     nombre_archivo = input("Ingrese el nombre del archivo (con extensión, por ejemplo: texto.txt): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
-    ruta = "./Reto_Unidad_5/" + nombre_archivo
+    ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding="utf-8") as archivo: # Se abre el archivo de texto. Se usa encoding="utf-8" para asegurar que la información se interprete en el formato correcto.
         contenido = archivo.read().lower() # Leemos el archivo. El método lower() para pasar todas las letras a minúscula y trabajar más cómodamente.
     vocales = ["a","e","i","o","u"] # Se crea una lista vacía donde se almacenarán las vocales. Agregamos las vocales iniciales para garantizar el orden en el histograma. Suma una letra de más a cada vocal, pero es irrelevante en la gráfica.
@@ -83,28 +83,36 @@ def HDODLV():
 # Creación de funciones CASE 3 MENÚ PRINCIPAL:
 
 def M15PF ():
-    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ")
-    ruta = "./Reto_Unidad_5/" + nombre_archivo
+    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding="latin-1") as archivo: # Se abre el archivo de texto. Se usa encoding="latin-1" para asegurar que la información se interprete en el formato correcto.
-        contenido = archivo.read() # Leemos los datos del archivo.
-    print("=== PRIMERAS QUINCE (15) FILAS DEL ARCHIVO ===")
-    contador = 0 # Usamos un contador para garantizar que solo se mostrarán las primeras 15 líneas.
-    for linea in archivo:
-        print(linea)
-        contador += 1 # Sumamos una unidad al contador, pues ya se ha mostrado una línea.
-        if contador == 15: 
-            break  # Detiene el ciclo después de 15 líneas.
-    archivo.close() # Se cierra el archivo para evitar conflictos al momento de querer modificarlo después.
-    print(f"Se mostraron las primeras {contador} líneas del archivo.")
+        print("=== PRIMERAS QUINCE (15) FILAS DEL ARCHIVO ===")
+        contador = 0 # Usamos un contador para garantizar que solo se mostrarán las primeras 15 líneas.
+        for linea in archivo:
+            print(linea.strip().replace(',', ' | ')) # Imprimimos cada línea. El módulo .strip() permite quitar saltos de línea. # Al reemplazar comas por barras, nos permite una visualización más agradable al momento de ejercutar el código.
+            contador += 1 # Sumamos una unidad al contador, pues ya se ha mostrado una línea.
+            if contador == 15: 
+                break  # Detiene el ciclo después de 15 líneas.
+        print(f"Se mostraron las primeras {contador} líneas del archivo.")
 
 
-def CE(datos): # La función recibe como argumento la variable datos que contiene la información por colunmas.
-    columna = int(input("Ingrese el número de la columna que desea analizar (empezando desde 0): ")) # Permite elegir al usuario la colunma a analizar.
-    valores = [] # Se crea una lista vacía para almacenar los datos de la columna específica.
-    for fila in datos: # Se usa un bucle for para recorrer cada fila, pues finalmente la colunma requiere filas para almacenar los datos.
-        valores.append(fila[columna]) # Se agregan los datos a la lista a medida que se recorren las filas. Se usa [colunma] para asegurar que solo se incluye el dato posicionado en la colunma seleccioanda.
+def CE():
+    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ")  # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    ruta = "./Reto_Unidad_5/" + nombre_archivo  # Se ingresa la ruta del archivo, para leerlo correctamente.
     
-    n = len(valores) # Se define una variable para contar cuantos valores tiene la lista, es decir, con cuantos datos se van a calcular las estadísticas.
+    valores = []  # Se crea una lista vacía para almacenar los datos de la columna específica.
+    
+    with open(ruta, "r", encoding="latin-1") as archivo:  # Se abre el archivo de texto. Se usa encoding="latin-1" para asegurar que la información se interprete en el formato correcto.
+        lector = csv.reader(archivo)  # Se usa el módulo csv para leer correctamente los datos separados por comas.
+        columna = int(input("Ingrese el número de la columna que desea analizar (empezando desde 0): "))  # Permite elegir al usuario la columna a analizar.
+        for fila in lector:  # Se usa un bucle for para recorrer cada fila del archivo.
+            try:
+                valor = float(fila[columna])  # Convierte el dato a número (float) para permitir operaciones matemáticas.
+                valores.append(valor)  # Se agregan los datos a la lista.
+            except (ValueError, IndexError):
+                continue  # Ignora filas vacías o con datos no numéricos.
+    
+    n = len(valores)  # Se define una variable para contar cuántos valores tiene la lista, es decir, con cuántos datos se van a calcular las estadísticas.
     
     # Se calcula el promedio.
     suma = 0
@@ -113,9 +121,9 @@ def CE(datos): # La función recibe como argumento la variable datos que contien
     promedio = suma / n
     
     # Se calcula la mediana.
-    valores_ordenados = sorted(valores) # sorted() permite organizar los datos de menor a mayor, paso estrictamente necesario para calcular la mediana.
+    valores_ordenados = sorted(valores)  # sorted() permite organizar los datos de menor a mayor, paso estrictamente necesario para calcular la mediana.
     if n % 2 == 0:
-        mediana = (valores_ordenados[n//2 - 1] + valores_ordenados[n//2]) / 2 # Si el número de valores es par, indica que la mediana va a estar dada por el promedio de dos valores. Si es impar, va a ser un único elemento.
+        mediana = (valores_ordenados[n//2 - 1] + valores_ordenados[n//2]) / 2  # Si el número de valores es par, indica que la mediana va a estar dada por el promedio de dos valores. Si es impar, va a ser un único elemento.
     else:
         mediana = valores_ordenados[n//2]
     
@@ -128,6 +136,8 @@ def CE(datos): # La función recibe como argumento la variable datos que contien
     maximo = max(valores)
     minimo = min(valores)
     
+    print(f"=== CALCULOS ESTADÍSTICOS ===\n Número de Datos ---> {n}\n Promedio ---> {promedio}\n Mediana ---> {mediana}\n Desviación Estándar ---> {desviacion}\n Máximo ---> {maximo}\n Mínimo ---> {minimo}")
+
     # Se retornan los resultados en forma de diccionario, para poder mostrarlos después.
     return {
         "Número de datos": n,
@@ -137,11 +147,33 @@ def CE(datos): # La función recibe como argumento la variable datos que contien
         "Máximo": maximo,
         "Mínimo": minimo
     }
-    print (f"===CALCULOS ESTADÍSTICOS===\n Número de Datos ---> {n}\n Promedio ---> {promedio}\n Mediana ---> {mediana}\n Desviación Estándar ---> {desviacion}\n Máximo ---> {maximo}\n Mínimo ---> {minimo}")
 
 
-def GUCCLD():
-  print ("Aún se está trabajando en la función.")
+def GUCCLD():      
+    nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
+    delimitador = input("¿Su archivo está delimitado por ',' ó ';')? Digite su respuesta: ") # Se pide especificar qué tipo de delimitador tiene el archivo para procesarlo correctamente.
+    columna = input("Ingrese el nombre de la columna a graficar: ") # Así podemos saber cuáles son los datos de la columna de interés.
+    ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
+    with open(ruta, "r", encoding='latin-1') as archivo: # Se abre el archivo de texto. Se usa encoding="latin-1" para asegurar que la información se interprete en el formato correcto.
+        lector = csv.DictReader(archivo, delimiter = delimitador) # csc.DictReader permite interpretar cada fila del archivo como un diccionario. También se especifica el delimitador ya concocido.
+        datos = [] # Se crea una lista vacía.
+        for fila in lector: # Se usa el bucle for para recorrer cada fila.
+            valor = fila[columna] # Extraemos los datos de cada fila ubicados en una colunma en específico. 
+            datos.append(float(valor)) # Se agregan los datos ya extraidos a la lista.
+        if datos: # Se ejecuta siempre que la lista datos no esté vacía.
+            x = [] # Lista vacía para variable x (abscisas) en el gráfico.
+            y = [] # Lista vacía para variable y (ordenadas) en el gráfico.
+            for i in range(len(datos)): # Se ejecuta tantas veces como datos hayan.
+                x.append(i) # Para cada posición...
+                y.append(datos[i]) # ...corresponde un dato.
+            plt.scatter(x, y) # Se dibuja una gráfica de puntos que toma los valores de X como eje horizontal, los valores de Y como eje vertical.
+            plt.title(f'Gráfico de la columna: {columna}') # Se agrega un título al gráfico.
+            plt.xlabel('Índice') # Nombra al eje. 
+            plt.ylabel(columna) # Nombra al eje.
+            plt.show() # Muestra al gráfico en pantalla.
+        else:
+            print("No se encontraron datos numéricos en esa columna.")      
+ 
 
 
 # MENÚ PRINCIPAL.
@@ -169,7 +201,7 @@ while True:
                 case _:
                     print ("Por favor, seleccione una opción válida.")
         case 3:
-            OPCION3 = int(input("Ha seleccionado la opción que le permite procesar archivos (.csv).\n Ahora, seleccione qué desea realizar con su archivo:\n (1). Mostrar las 15 primeras filas.\n (2). Calcular estadísticas.\n (3). Graficar una columna completa con los datos.\n (4). Salir."))
+            OPCION3 = int(input("Ha seleccionado la opción que le permite procesar archivos (.csv).\n Esta opción le permite: \n (1). Mostrar las 15 primeras filas.\n (2). Calcular estadísticas.\n (3). Graficar una columna completa con los datos.\n (4). Salir.\n Ahora, seleccione qué desea realizar con su archivo: "))
             match (OPCION3):
                 case 1:
                     M15PF()

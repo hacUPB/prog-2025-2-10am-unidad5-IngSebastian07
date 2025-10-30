@@ -3,5 +3,5 @@
 ### Información del estudiante.
 + *Nombre:* Sebastián Pulgarín Castrillón.
 + *ID:* 000577197  
-### Descripción del repositorio.**
+### Descripción del repositorio.
 Repositorio Unidad 5 del curso de Programación. 

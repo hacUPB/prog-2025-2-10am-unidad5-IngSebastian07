@@ -25,7 +25,8 @@ def LA():
     if not archivos:
         print("La carpeta está vacía.")
     else:
-        for i, archivo in enumerate(archivos, start=1): # Recorre todos los archivos en la lista y comienza en uno para una correcta numeración.
+        for i, archivo in enumerate(archivos, start=1):  # Recorre todos los archivos en la lista y comienza en uno para una correcta numeración.
+            # ¡DECLARACIÓN DE IA! Se hizo uso de IA para saber cómo se podía enumerar cada archivo empezando en 1.
             print(f"{i}. {archivo}")
 
 
@@ -79,6 +80,7 @@ def HDODLV():
     plt.xlabel("Vocales") # Se asignan las vocales a lo largo del eje X.
     plt.ylabel("Frecuencia") # Se asignan las ocurrencias a lo largo del eje Y.
     plt.show() # Se muestra el histograma.
+    # ¡DECLARACIÓN DE IA! Se hizo uso de IA para entender a qué correspondía cada configuración del gráfico.
 
 # Creación de funciones CASE 3 MENÚ PRINCIPAL:
 
@@ -86,6 +88,7 @@ def M15PF ():
     nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
     ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding="latin-1") as archivo: # Se abre el archivo de texto. Se usa encoding="latin-1" para asegurar que la información se interprete en el formato correcto.
+        # ¡DECLARACIÓN DE IA! Se hizo uso de IA para corregir un error con la codificación. Sugirió usar "latin-1" y resultó corrigiendo el error.
         print("=== PRIMERAS QUINCE (15) FILAS DEL ARCHIVO ===")
         contador = 0 # Usamos un contador para garantizar que solo se mostrarán las primeras 15 líneas.
         for linea in archivo:
@@ -147,7 +150,8 @@ def CE():
         "Máximo": maximo,
         "Mínimo": minimo
     }
-
+# ¡DECLARACIÓN DE IA! En esta función, se le preguntó como hacer que se ignoraran filas que no contuvieran datos numéricos. Sugirió usar "try, except".
+# ¡DECLARACIÓN DE IA! Se usó para calcular la desviación estándar con los datos.
 
 def GUCCLD():      
     nombre_archivo = input("Ingrese el nombre del archivo CSV (por ejemplo: datos.csv): ") # Pedimos al usuario el nombre del archivo junto con su extensión para trabajar sobre él.
@@ -155,7 +159,8 @@ def GUCCLD():
     columna = input("Ingrese el nombre de la columna a graficar: ") # Así podemos saber cuáles son los datos de la columna de interés.
     ruta = "./Reto_Unidad_5/" + nombre_archivo # Se ingresa la ruta del archivo, para leerlo correctamente.
     with open(ruta, "r", encoding='latin-1') as archivo: # Se abre el archivo de texto. Se usa encoding="latin-1" para asegurar que la información se interprete en el formato correcto.
-        lector = csv.DictReader(archivo, delimiter = delimitador) # csc.DictReader permite interpretar cada fila del archivo como un diccionario. También se especifica el delimitador ya concocido.
+        lector = csv.DictReader(archivo, delimiter = delimitador) # csv.DictReader permite interpretar cada fila del archivo como un diccionario. También se especifica el delimitador ya concocido.
+        # ¡DECLARACIÓN DE IA! Se hizo uso de IA para conocer el módulo csv.DictReader que es muy conveniente para esta función.
         datos = [] # Se crea una lista vacía.
         for fila in lector: # Se usa el bucle for para recorrer cada fila.
             valor = fila[columna] # Extraemos los datos de cada fila ubicados en una colunma en específico. 

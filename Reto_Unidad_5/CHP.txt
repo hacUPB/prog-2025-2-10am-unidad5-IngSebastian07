@@ -1,29 +1,29 @@
 El Ciclo Hidrológico: El Viaje Continuo del Agua
 
-El OEEEEEEEE del agua, también conocido como el OEEEEEEEE hidrológico, describe el movimiento continuo del agua sobre, por debajo y a través de la superficie de la Tierra y la atmósfera. Este proceso dinámico es vital para mantener la vida, regular el clima y moldear el paisaje terrestre.
+El ciclo del agua, también conocido como el ciclo hidrológico, describe el movimiento continuo del agua sobre, por debajo y a través de la superficie de la Tierra y la atmósfera. Este proceso dinámico es vital para mantener la vida, regular el clima y moldear el paisaje terrestre.
 
-### I. Componentes Clave del Ciclo
+** I. Componentes Clave del Ciclo
 
-El OEEEEEEEE se compone de varias etapas interconectadas, impulsadas principalmente por la energía solar y la gravedad.
+El ciclo se compone de varias etapas interconectadas, impulsadas principalmente por la energía solar y la gravedad.
 
-#### A. Evaporación ☀️
+* A. Evaporación ☀️
 La **evaporación** es el proceso por el cual el agua líquida de los océanos, mares, lagos y ríos se transforma en vapor de agua (un gas) debido al aumento de energía térmica (calor). El sol es la principal fuente de energía que impulsa este proceso, elevando las moléculas de agua a la atmósfera.
 
-#### B. Transpiración y Evapotranspiración 🌳
+* B. Transpiración y Evapotranspiración 🌳
 La **transpiración** es la liberación de vapor de agua a la atmósfera por parte de las plantas, principalmente a través de pequeños poros en sus hojas llamados estomas. La **evapotranspiración** es un término que combina la pérdida de agua por evaporación del suelo y las superficies acuáticas, más la transpiración de las plantas. Es una medida clave de cuánto vapor de agua regresa a la atmósfera en una región dada.
 
-#### C. Condensación ☁️
+* C. Condensación ☁️
 A medida que el vapor de agua asciende en la atmósfera, encuentra temperaturas más frías. Este enfriamiento hace que el vapor se convierta de nuevo en agua líquida o hielo, un proceso llamado **condensación**. Estas minúsculas gotas o cristales de hielo se agrupan alrededor de partículas de polvo o sal (núcleos de condensación) para formar las **nubes**.
 
-#### D. Precipitación 🌧️❄️
+* D. Precipitación 🌧️❄️
 Cuando las nubes están saturadas, las gotas de agua o los cristales de hielo se vuelven demasiado pesados para permanecer suspendidos. Entonces caen a la Tierra en forma de **precipitación**. Las formas comunes de precipitación incluyen la lluvia, la nieve, el granizo y el aguanieve. Este es el principal mecanismo por el cual el agua retorna de la atmósfera a la superficie terrestre.
 
-### II. Movimiento del Agua en la Superficie y Subsuelo
+** II. Movimiento del Agua en la Superficie y Subsuelo
 
 Una vez que el agua ha caído a la superficie, sigue varios caminos:
 
-#### E. Escorrentía Superficial 🏞️
-Parte del agua que precipita fluye sobre la superficie del terreno, un proceso conocido como **escorrentía superficial**. Esta agua viaja hacia arroyos, ríos y, finalmente, regresa a los océanos o lagos, completando una parte del OEEEEEEEE. La escorrentía es vital para el llenado de los cuerpos de agua dulce.
+* E. Escorrentía Superficial 🏞️
+Parte del agua que precipita fluye sobre la superficie del terreno, un proceso conocido como **escorrentía superficial**. Esta agua viaja hacia arroyos, ríos y, finalmente, regresa a los océanos o lagos, completando una parte del ciclo. La escorrentía es vital para el llenado de los cuerpos de agua dulce.
 
-#### F. Infiltración y Percolación 💧
+* F. Infiltración y Percolación 💧
 Otra porción del agua de la precipitación se filtra o se absorbe en el suelo, un proceso llamado **infiltración**. Una vez en el subsuelo, el agua se mueve hacia abajo por gravedad a través de los poros y grietas de las rocas y sedimentos (percol

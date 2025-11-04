@@ -8,4 +8,4 @@ Este es el repositorio de la Unidad 5 del curso de programación para el semestr
 
 **Enlace al video de demostración del reto:** https://drive.google.com/file/d/1QoFN3KCXQ02uNB25QEqqrf9DjEg04AdH/view?usp=sharing
 
-*Nota: En caso de que exista algún inconveniente para visualizar el video, por favor ponerse en contacto.*
+*Nota: En caso de que exista algún inconveniente para visualizar el video, por favor ponerse en contacto...*
